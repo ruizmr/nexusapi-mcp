@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nexusapi"
+version = "0.1.0"
+description = "18 compute tools for AI agents: web scraping, code execution, ML inference"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = ["httpx>=0.24"]
+keywords = ["ai", "agents", "mcp", "web-scraping", "code-execution", "ml-inference", "api"]
+
+[project.urls]
+Homepage = "https://github.com/ruizmr/nexusapi-mcp"

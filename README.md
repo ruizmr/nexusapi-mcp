@@ -1,88 +1,94 @@
-# NexusAPI MCP Server
+# NexusAPI — 18 Compute Tools for AI Agents
 
-> **18 compute tools for AI agents.** Web scraping, code execution, text analysis, image processing, data tools, ML inference.
-> Self-register, 250 free credits, pay with USDC on Base L2.
+Web scraping, sandboxed code execution, ML inference, and 15 more tools. **250 free credits on signup.**
 
-**Server:** `https://marble-appendix-accurately-mark.trycloudflare.com`
-
-## Try It Now
+## Install the SDK
 
 ```bash
-curl -s https://marble-appendix-accurately-mark.trycloudflare.com/static/try.sh | bash
+pip install git+https://github.com/ruizmr/nexusapi-mcp.git
 ```
 
-## Quick Start
+## Quick Start (3 lines)
+
+```python
+from nexusapi import NexusAPI
+
+api = NexusAPI()  # auto-registers, instant API key, 250 free credits
+
+# Scrape any URL → clean text
+page = api.scrape("https://news.ycombinator.com")
+
+# Execute Python safely
+result = api.execute("import math; print(math.factorial(20))")
+
+# ML inference
+sentiment = api.sentiment("Agent-to-agent commerce is the future")
+```
+
+## Zero-Auth Demo (try before registering)
 
 ```bash
-# Register (instant, no approval)
+# Scrape — no API key needed
+curl "https://marble-appendix-accurately-mark.trycloudflare.com/v1/try/scrape?url=https://example.com"
+
+# Sentiment — no API key needed
+curl "https://marble-appendix-accurately-mark.trycloudflare.com/v1/try/sentiment?text=AI+agents+are+amazing"
+```
+
+## Agent Self-Registration (one call)
+
+```bash
 curl -X POST https://marble-appendix-accurately-mark.trycloudflare.com/v1/agent/register \
-  -H 'Content-Type: application/json' \
-  -d '{"agent_name":"my-agent","contact_email":"you@example.com"}'
-# Returns: {"api_key":"nx_...", "credits":250, ...}
+  -H "Content-Type: application/json" \
+  -d '{"agent_name": "my-agent", "contact_email": "agent@example.com"}'
 ```
 
-## High-Value Tools
-
-### Web Scrape (5 credits)
-```bash
-curl -X POST https://marble-appendix-accurately-mark.trycloudflare.com/v1/web/scrape \
-  -H 'Authorization: Bearer YOUR_KEY' \
-  -H 'Content-Type: application/json' \
-  -d '{"url":"https://example.com","format":"markdown"}'
-```
-
-### Code Execution (20 credits)
-```bash
-curl -X POST https://marble-appendix-accurately-mark.trycloudflare.com/v1/exec/python \
-  -H 'Authorization: Bearer YOUR_KEY' \
-  -H 'Content-Type: application/json' \
-  -d '{"code":"print(sum(range(100)))","timeout":10}'
-```
-
-### ML Inference (10 credits)
-```bash
-curl -X POST https://marble-appendix-accurately-mark.trycloudflare.com/v1/ml/infer \
-  -H 'Authorization: Bearer YOUR_KEY' \
-  -H 'Content-Type: application/json' \
-  -d '{"task":"sentiment-analysis","text":"This tool is incredible"}'
-```
+Returns: `{"api_key": "nx_...", "credits": 250}`
 
 ## All 18 Tools
 
-| Tool | Endpoint | Credits |
-|------|----------|---------|
-| **Web Scrape** | `POST /v1/web/scrape` | **5** |
-| **Batch Scrape (10 URLs)** | `POST /v1/web/scrape/batch` | **25** |
-| **Python Execution** | `POST /v1/exec/python` | **20** |
-| **ML Inference** | `POST /v1/ml/infer` | **10** |
-| Sentiment Analysis | `POST /v1/text/sentiment` | 1 |
-| Summarization | `POST /v1/text/summarize` | 2 |
-| Keyword Extraction | `POST /v1/text/keywords` | 1 |
-| Entity Recognition | `POST /v1/text/entities` | 1 |
-| Readability Score | `POST /v1/text/readability` | 1 |
-| Image Resize | `POST /v1/image/resize` | 2 |
-| Image Optimize | `POST /v1/image/optimize` | 2 |
-| Image Watermark | `POST /v1/image/watermark` | 3 |
-| JSON Tools | `POST /v1/data/json/*` | 1 |
-| CSV to JSON | `POST /v1/data/csv/to-json` | 1 |
-| Hash (SHA256, etc.) | `POST /v1/data/hash` | 1 |
-| Regex | `POST /v1/data/regex/*` | 1 |
-| QR Code | `POST /v1/utility/qr` | 1 |
-| UUID/Password/etc. | `POST /v1/utility/*` | 1 |
+| Category | Endpoint | Credits | Description |
+|----------|----------|---------|-------------|
+| **Web** | `/v1/web/scrape` | 5 | Fetch URL → clean text/markdown/links |
+| **Web** | `/v1/web/scrape/batch` | 25 | Batch scrape up to 5 URLs |
+| **Code** | `/v1/exec/python` | 20 | Sandboxed Python execution |
+| **Code** | `/v1/exec/python/batch` | 80 | Batch execute up to 5 scripts |
+| **NLP** | `/v1/text/sentiment` | 10 | Sentiment analysis |
+| **NLP** | `/v1/text/summarize` | 10 | Text summarization |
+| **NLP** | `/v1/text/keywords` | 5 | Keyword extraction |
+| **NLP** | `/v1/text/entities` | 10 | Named entity recognition |
+| **NLP** | `/v1/text/readability` | 1 | Readability scoring |
+| **ML** | `/v1/ml/zero-shot` | 10 | Zero-shot text classification |
+| **Image** | `/v1/image/resize` | 5 | Image resize/optimize |
+| **Image** | `/v1/image/blur` | 3 | Image blur/effects |
+| **Data** | `/v1/data/hash` | 1 | SHA256/MD5/etc hashing |
+| **Data** | `/v1/data/encode` | 1 | Base64/URL encoding |
+| **Data** | `/v1/data/regex` | 1 | Regex matching |
+| **Util** | `/v1/util/qr` | 2 | QR code generation |
+| **Util** | `/v1/util/uuid` | 1 | UUID generation |
+| **Util** | `/v1/util/timestamp` | 1 | Timestamp conversion |
 
-## Pricing
+## MCP Integration
 
-- **250 free credits** on signup ($0.25)
-- 1 credit = $0.001
-- Deposit USDC on Base L2 for more
+```json
+{
+  "mcpServers": {
+    "nexusapi": {
+      "url": "https://marble-appendix-accurately-mark.trycloudflare.com/.well-known/mcp.json"
+    }
+  }
+}
+```
 
-## Discovery
+## Payment
 
-| Endpoint | Description |
-|----------|-------------|
-| `/.well-known/ai-plugin.json` | OpenAI plugin manifest |
-| `/.well-known/mcp.json` | MCP manifest |
-| `/v1/agent/tools` | Full tool list |
+- **Free tier**: 250 credits on signup
+- **Top up**: Deposit USDC on Base L2 to treasury address (auto-credited in 30s)
+- **Pricing**: 1 credit = $0.001
 
-## License
-MIT
+## Why NexusAPI?
+
+- **Zero friction**: One POST to register, instant API key
+- **Agent-native**: MCP manifest, machine-readable schemas, no human auth flows
+- **Sovereign compute**: Runs on dedicated hardware, no cloud vendor lock-in
+- **Crypto payments**: USDC on Base L2, sub-cent transaction fees
