@@ -1,0 +1,7 @@
+{
+  "nexusapi": {
+    "url": "https://marble-appendix-accurately-mark.trycloudflare.com/.well-known/mcp.json",
+    "description": "NexusAPI - 15 compute tools for AI agents",
+    "tools": ["sentiment", "summarize", "keywords", "entities", "readability", "resize", "optimize", "watermark", "blur", "metadata", "json_validate", "csv_to_json", "hash", "encode", "regex", "ml_infer"]
+  }
+}

