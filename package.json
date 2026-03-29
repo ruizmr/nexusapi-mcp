@@ -1,0 +1,10 @@
+{
+  "name": "nexusapi-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for NexusAPI - web scraping, code execution, ML inference",
+  "main": "index.js",
+  "bin": { "nexusapi-mcp": "index.js" },
+  "dependencies": { "@modelcontextprotocol/sdk": "^1.0.0" },
+  "keywords": ["mcp", "ai", "agents", "web-scraping", "code-execution", "ml"],
+  "license": "MIT"
+}
